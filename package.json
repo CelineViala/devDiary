@@ -1,0 +1,28 @@
+{
+  "name": "devdiary",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "DEBUG=*,-express:*,-nodemon:*,-send:*,-body-parser:* npx nodemon",
+    "resetDB": "psql -d diary -f data/init_db.sql -f data/entryView.sql -f data/functions.sql -f data/seeding.sql;"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "debug": "^2.6.9",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-joi-validation": "^5.0.1",
+    "helmet": "^6.0.0",
+    "joi": "^17.7.0",
+    "multer": "^1.4.5-lts.1",
+    "pg": "^8.8.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.27.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  }
+}

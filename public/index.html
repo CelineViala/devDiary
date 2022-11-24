@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="Utils.js" defer></script>
+    <script src="Entry.js" defer></script>
+    <script src="index.js" defer></script>
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="new.html">Ajouter une nouvelle entrée</a></li>
+            
+        </ul>
+    </nav>
+    <header>
+        <h1>Bienvenue</h1>
+        <h2>Les dernières entrées</h2>
+    </header>
+    <main class="container">
+        <form action="">
+            <label for="">Rechercher par</label>
+            <select class="form-select category" for="category">
+                <option name="category" value="1">
+                    titre
+                </option>
+                <option name="category" value="2">
+                    categorie
+                </option>
+                <option name="category" value="3">
+                    mot clé
+                </option>
+                <option name="category" value="4">
+                    date
+                </option>
+            </select>
+        </form>
+        <template id="entryTemplate">
+            <section data-entry-id="A">
+                <h3><a class="title" href="">Titre</a> </h3>
+                <p class="date">Date</p>
+                <p>Categorie : <span class="category"></span></p>
+                <p>Contexte: <span class="context"></span></p>
+                <p class="fixed"></p>
+                <p class="label_category"></p>
+                <p class="keywords">Mots clés : </p>
+                
+            </section>
+            
+        </template>
+        
+
+    </main>
+</body>
+
+</html>
