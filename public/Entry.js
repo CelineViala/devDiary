@@ -63,6 +63,7 @@ class Entry {
         const spanElm = document.createElement('span');
         spanElm.classList.add('tag');
         spanElm.classList.add('is-light');
+        spanElm.classList.add('mr-1');
         spanElm.classList.add('keyword');
         spanElm.textContent = `${value} `;
         keywordsContainerElm.appendChild(spanElm);
@@ -74,7 +75,7 @@ class Entry {
     entryElm.dataset.entryId = entry.id;
 
     // Add clone to DOM
-    const containerElm = document.querySelector('.container');
+    const containerElm = document.querySelector('.containerEntries');
     containerElm.append(cloneEntryElm);
   }
 

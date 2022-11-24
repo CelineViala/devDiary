@@ -18,7 +18,7 @@ class FormEntry {
     this.addCaptureElm = document.querySelector('.addCapture');
 
     this.formElm = document.querySelector('form');
-    this.titleElm = document.querySelector('.title');
+    this.titleElm = document.querySelector('.titleElm');
     this.dateElm = document.querySelector('.date');
     this.categoryElm = document.querySelector('.category');
     this.contextElm = document.querySelector('.context');
@@ -52,7 +52,12 @@ class FormEntry {
   handleModif(e) {
     this.paramsCreation[e.target.dataset.entity][e.target.dataset.field] = e.target.value;
     this.paramsCreation[e.target.dataset.entity].diary_entry_id = this.idEntry;
-    this.addQueries[`api/${e.target.dataset.entity}/${this.idEntry}`] = this.paramsCreation[e.target.dataset.entity];
+
+    if (this.addQueries[`api/${e.target.dataset.entity}/${this.idEntry}`] === undefined) {
+      this.addQueries[`api/${e.target.dataset.entity}/${this.idEntry}`] = [];
+    }
+    this.addQueries[`api/${e.target.dataset.entity}/${this.idEntry}`].push({ ...this.paramsCreation[e.target.dataset.entity] });
+    console.log(this.addQueries);
   }
 
   appendTemplate(template, parent) {
@@ -110,6 +115,7 @@ class FormEntry {
         paragraphsElms.forEach((text) => { if (text.value !== '') paragraphsArray.push({ content: text.value }); });
         capturesElms.forEach((elm) => { if (elm.value !== '') capturesArray.push({ path: elm.value }); });
         linksInputs.forEach((input) => { if (input.value !== '') linksArray.push({ address: input.value }); });
+
         const bodyObject = JSON.stringify({
           title,
           date,
@@ -120,17 +126,19 @@ class FormEntry {
           categoryId,
         });
         await Utils.fetchData('/api/entries', 'POST', bodyObject);
-      } else {
-        Object.entries(this.updateQueries).forEach(async ([key, value]) => {
-          await Utils.fetchData(`http://localhost:4000/${key}`, 'PATCH', JSON.stringify(value));
-        });
-        Object.entries(this.addQueries).forEach(async ([key, value]) => {
-          await Utils.fetchData(`http://localhost:4000/${key}`, 'POST', JSON.stringify(value));
-        });
-        this.deleteQueries.forEach(async (query) => {
-          await Utils.fetchData(`http://localhost:4000/${query}`, 'DELETE', null);
-        });
       }
+      Object.entries(this.updateQueries).forEach(async ([key, value]) => {
+        await Utils.fetchData(`http://localhost:4000/${key}`, 'PATCH', JSON.stringify(value));
+      });
+      Object.entries(this.addQueries).forEach(async ([key, value]) => {
+        value.forEach(async(obj) => {
+          await Utils.fetchData(`http://localhost:4000/${key}`, 'POST', JSON.stringify(obj));
+        });
+      });
+      this.deleteQueries.forEach(async (query) => {
+        await Utils.fetchData(`http://localhost:4000/${query}`, 'DELETE', null);
+      });
+
       document.location.href = 'http://localhost:4000/';
     });
   }
@@ -155,6 +163,7 @@ class FormEntry {
 
   fillFields(entry) {
     this.titleElm.value = entry.title;
+    console.log(this.titleElm)
     this.contextElm.value = entry.context;
     let date = new Date(entry.date).toLocaleDateString('fr-FR').split('/');
     date = `${date[2]}-${date[1]}-${date[0]}`;
