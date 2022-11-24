@@ -126,19 +126,19 @@ class FormEntry {
           categoryId,
         });
         await Utils.fetchData('/api/entries', 'POST', bodyObject);
-      }
-      Object.entries(this.updateQueries).forEach(async ([key, value]) => {
-        await Utils.fetchData(`http://localhost:4000/${key}`, 'PATCH', JSON.stringify(value));
-      });
-      Object.entries(this.addQueries).forEach(async ([key, value]) => {
-        value.forEach(async(obj) => {
-          await Utils.fetchData(`http://localhost:4000/${key}`, 'POST', JSON.stringify(obj));
+      } else {
+        Object.entries(this.updateQueries).forEach(async ([key, value]) => {
+          await Utils.fetchData(`http://localhost:4000/${key}`, 'PATCH', JSON.stringify(value));
         });
-      });
-      this.deleteQueries.forEach(async (query) => {
-        await Utils.fetchData(`http://localhost:4000/${query}`, 'DELETE', null);
-      });
-
+        Object.entries(this.addQueries).forEach(async ([key, value]) => {
+          value.forEach(async (obj) => {
+            await Utils.fetchData(`http://localhost:4000/${key}`, 'POST', JSON.stringify(obj));
+          });
+        });
+        this.deleteQueries.forEach(async (query) => {
+          await Utils.fetchData(`http://localhost:4000/${query}`, 'DELETE', null);
+        });
+      }
       document.location.href = 'http://localhost:4000/';
     });
   }
@@ -163,7 +163,7 @@ class FormEntry {
 
   fillFields(entry) {
     this.titleElm.value = entry.title;
-    console.log(this.titleElm)
+    console.log(this.titleElm);
     this.contextElm.value = entry.context;
     let date = new Date(entry.date).toLocaleDateString('fr-FR').split('/');
     date = `${date[2]}-${date[1]}-${date[0]}`;

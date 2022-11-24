@@ -27,7 +27,8 @@ CREATE OR REPLACE VIEW "entry" AS
         JOIN diary_entry_has_keyword as dk ON dk.keyword_id=keyword.id
         GROUP by  dk.diary_entry_id
        ) k ON k.diary_entry_id=de.id
-    LEFT OUTER JOIN category on de.category_id=category.id;
+    LEFT OUTER JOIN category on de.category_id=category.id
+    ORDER BY de.date DESC;
 
 COMMIT;
 

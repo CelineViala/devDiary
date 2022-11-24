@@ -68,7 +68,7 @@ class Entry {
         spanElm.textContent = `${value} `;
         keywordsContainerElm.appendChild(spanElm);
       });
-    }
+    } else this.hide(keywordsContainerElm.firstElementChild);
     // update id data-attribute of EntryElm
     // document.querySelector('form .maclass #monid [monAttribut="LaValeurDeMonAttribut"]');
     const entryElm = cloneEntryElm.querySelector('[data-entry-id]');
