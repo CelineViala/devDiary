@@ -1,11 +1,10 @@
 const CoreDatamapper = require('./coreDatamapper');
-const client = require('../config/db');
 
 module.exports = class DiaryEntry extends CoreDatamapper {
   static tableName = 'diary_entry';
 
   static async findAll() {
-    const result = await client.query('SELECT * FROM "entry"');
+    const result = await this.client.query('SELECT * FROM "entry"');
     return result.rows;
   }
 
@@ -27,7 +26,7 @@ module.exports = class DiaryEntry extends CoreDatamapper {
       `,
       values: [id, obj],
     };
-    const result = await client.query(preparedQuery);
+    const result = await this.client.query(preparedQuery);
     return result.rows[0];
   }
 
@@ -40,12 +39,12 @@ module.exports = class DiaryEntry extends CoreDatamapper {
             `,
       values: [entry.id, keyword.id],
     };
-    const result = await client.query(preparedQuery);
+    const result = await this.client.query(preparedQuery);
     return result.rows[0];
   }
 
   static async deleteAllEntries() {
-    await client.query(`
+    await this.client.query(`
             DELETE FROM "${this.tableName}"
         `);
     return 200;
