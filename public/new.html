@@ -10,102 +10,110 @@
     <script src="Entry.js" defer></script>
     <script src="FormEntry.js" defer></script>
     <script src="new.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 
 <body>
-    <nav>
-        <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="new.html">Ajouter une nouvelle entrée</a></li>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <ul class="navbar-brand">
+            <li><a class="navbar-item" href="index.html">Accueil</a></li>
+            <li><a class="navbar-item" href="new.html">Ajouter une nouvelle entrée</a></li>
+            
         </ul>
     </nav>
-    <h1>Entrée journal</h1>
+    <main class="container">
+        <h1 class="title">Entrée journal</h1>
 
-    <form action="" method="POST">
-        <p class="msg"></p>
-        <template id="keywordInputTemplate">
-            <div class="form-outline form-white mb-4">
-                <input class="keyword input" data-entity="keyword" data-field="label" name="keyword" type="text" class="">
-                <input class="removeItem" type="button" value="-">
-            
-            </div>
-        </template>
-        <template id="paragraphTemplate">
-            <div class="form-outline form-white mb-4">
-                <textarea name="paragraph"  data-entity="paragraph" data-field="content" class="paragraph input" cols="30" rows="10"></textarea>
-                <input class="removeItem" type="button" value="-">
-            </div>
-        </template>
-        <template id="linkTemplate">
-            <div class="form-outline form-white mb-4">
-                <input class="link input" data-entity="link" data-field="address" name="link" type="text" class="">
-                <input class="removeItem" type="button" value="-">
-            </div>
-        </template>
-        <template id="captureTemplate">
-            <div class="form-outline form-white mb-4">
-                <input class="capture input" data-entity="capture" data-field="path" name="capture" type="file" class="">
-                <input class="removeItem" type="button" value="-">
-            </div>
-        </template>
+        <form action="" method="POST">
+            <p class="msg"></p>
+            <template id="keywordInputTemplate">
+                <div class="form-outline form-white mb-4">
+                    <input class="keyword inputForm input" data-entity="keyword" data-field="label" name="keyword" type="text"
+                        class="">
+                    <input class="removeItem" type="button" value="-">
 
-        <label class="form-label" for="title">Titre</label>
-        <input class="title input" data-entity="entry" data-field="title" name="title" type="text" class="">
+                </div>
+            </template>
+            <template id="paragraphTemplate">
+                <div class="form-outline form-white mb-4">
+                    <textarea name="paragraph" data-entity="paragraph" data-field="content" class="paragraph input"
+                        cols="30" rows="10"></textarea>
+                    <input class="removeItem" type="button" value="-">
+                </div>
+            </template>
+            <template id="linkTemplate">
+                <div class="form-outline form-white mb-4">
+                    <input class="link inputForm input" data-entity="link" data-field="address" name="link" type="text" class="">
+                    <input class="removeItem" type="button" value="-">
+                </div>
+            </template>
+            <template id="captureTemplate">
+                <div class="form-outline form-white mb-4">
+                    <input class="capture inputForm" data-entity="capture" data-field="path" name="capture" type="file"
+                        class="">
+                    <input class="removeItem" type="button" value="-">
+                </div>
+            </template>
 
-        <div class="form-outline form-white mb-4">
-            <label class="form-label" for="date">Date</label>
-            <input class="date input" data-entity="entry" data-field="date" name="date" type="date" class="">
-        </div>
-        <div class="form-outline form-white mb-4">
-            <label class="form-label" for="context">Contexte (facultatif)</label>
-            <input class="context input" data-entity="entry" data-field="context" name="context" type="text" class="">
-        </div>
-        <div class="links">
-            <div class="form-outline form-white mb-4">
-                <label class="form-label" for="link">Lien (facultatif)</label>
-                <input class="addLink input" type="button" value="+">
-            </div>
-        </div>
-        <div class="captures">
-            <div class="form-outline form-white mb-4">
-                <label class="form-label" for="capture">Ajouter une capture d'écran (facultatif)</label>
-                <input class="addCapture" type="button" value="+">
-            </div>
-        </div>
-        <div class="keywords">
-            <div class="form-outline form-white mb-4">
-                <label class="form-label" for="keyword">Ajouter un Mot clé</label>
-                <input class="addKeyword" type="button" value="+">
-            </div>
-        </div>
-        <div class="paragraphs">
-            <p>Ajouter un paragraphe</p>
-            <input class="addParagraph" type="button" value="+">
-            
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="category">Categorie</label>
-            <select class="form-select category input" data-entity="entry" data-field="category_id" for="category">
-                <option name="category" value="1">
-                    veille
-                </option>
-                <option name="category" value="2">
-                    bug
-                </option>
-                <option name="category" value="3">
-                    astuce
-                </option>
-                <option name="category" value="4">
-                    autre
-                </option>
-            </select>
-        </div>
+            <label class="form-label" for="title">Titre</label>
+            <input class="title inputForm input" data-entity="entry" data-field="title" name="title" type="text" class="">
 
-        <input class="button close" type="button" value="Cancel">
-        <button class="button is-success">Enregistre</button>
-    </form>
+            <div class="form-outline form-white mb-4">
+                <label class="form-label" for="date">Date</label>
+                <input class="date inputForm input" data-entity="entry" data-field="date" name="date" type="date" class="">
+            </div>
+            <div class="form-outline form-white mb-4">
+                <label class="form-label" for="context">Contexte (facultatif)</label>
+                <input class="context inputForm input" data-entity="entry" data-field="context" name="context" type="text"
+                    class="">
+            </div>
+            <div class="links">
+                <div class="form-outline form-white mb-4">
+                    <label class="form-label" for="link">Lien (facultatif)</label>
+                    <input class="addLink inputForm" type="button" value="+">
+                </div>
+            </div>
+            <div class="captures">
+                <div class="form-outline form-white mb-4">
+                    <label class="form-label" for="capture">Ajouter une capture d'écran (facultatif)</label>
+                    <input class="addCapture" type="button" value="+">
+                </div>
+            </div>
+            <div class="keywords">
+                <div class="form-outline form-white mb-4">
+                    <label class="form-label" for="keyword">Ajouter un Mot clé</label>
+                    <input class="addKeyword" type="button" value="+">
+                </div>
+            </div>
+            <div class="paragraphs">
+                <p>Ajouter un paragraphe</p>
+                <input class="addParagraph" type="button" value="+">
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="category">Categorie</label>
+                <select class="form-select category inputForm input" data-entity="entry" data-field="category_id" for="category">
+                    <option name="category" value="1">
+                        veille
+                    </option>
+                    <option name="category" value="2">
+                        bug
+                    </option>
+                    <option name="category" value="3">
+                        astuce
+                    </option>
+                    <option name="category" value="4">
+                        autre
+                    </option>
+                </select>
+            </div>
+
+            <input class="button close" type="button" value="Cancel">
+            <button class="button is-success">Enregistre</button>
+        </form>
+    </main>
 </body>
 
 </html>

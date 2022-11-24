@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
     <script src="Utils.js" defer></script>
     <script src="Entry.js" defer></script>
     <script src="index.js" defer></script>
@@ -13,16 +14,16 @@
 
 <body>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="new.html">Ajouter une nouvelle entrée</a></li>
-            
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <ul class="navbar-brand">
+            <li><a class="navbar-item" href="index.html">Accueil</a></li>
+            <li><a class="navbar-item" href="new.html">Ajouter une nouvelle entrée</a></li>
+
         </ul>
     </nav>
-    <header>
-        <h1>Bienvenue</h1>
-        <h2>Les dernières entrées</h2>
+    <header class="container">
+        <h1 class="title">Bienvenue</h1>
+        <h2 class="subtitle">Les dernières entrées</h2>
     </header>
     <main class="container">
         <form action="">
@@ -43,19 +44,21 @@
             </select>
         </form>
         <template id="entryTemplate">
-            <section data-entry-id="A">
-                <h3><a class="title" href="">Titre</a> </h3>
-                <p class="date">Date</p>
-                <p>Categorie : <span class="category"></span></p>
-                <p>Contexte: <span class="context"></span></p>
-                <p class="fixed"></p>
-                <p class="label_category"></p>
-                <p class="keywords">Mots clés : </p>
-                
+            <section data-entry-id="A" class="card mb-2">
+                <div class="card-content">
+                    <h3><a class="title mb-1" href="">Titre</a> </h3>
+                    <p class="date has-text-link mb-1">Date</p>
+                    <p>Categorie : <span class="category tag is-light mb-1"></span></p>
+                    <p>Contexte: <span class="context mb-1"></span></p>
+                    <p class="fixed mb-1"></p>
+                    <p class="label_category mb-1"></p>
+                    <p class="keywords mb-1">Mots clés : </p>
+                </div>
+
             </section>
-            
+
         </template>
-        
+
 
     </main>
 </body>

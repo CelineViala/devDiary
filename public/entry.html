@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
     <script src="Utils.js" defer></script>
     <script src="Entry.js" defer></script>
     <script src="entry.js" defer></script>
@@ -13,24 +14,25 @@
 
 <body>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="new.html">Ajouter une nouvelle entrée</a></li>
+    <nav class="navbar container" role="navigation" aria-label="main navigation">
+        <ul class="navbar-brand">
+            <li><a class="navbar-item" href="index.html">Accueil</a></li>
+            <li><a class="navbar-item" href="new.html">Ajouter une nouvelle entrée</a></li>
+            
         </ul>
     </nav>
-    <header>
+    <header class="container">
         <h1 class="title"></h1>
     </header>
     <main class="container">
 
         <section data-entry-id="A">
-            <p class="date"></p>
-            <p>Categorie : <span class="category"></span></p>
+            <p class="date has-text-link mb-1"></p>
+            <p>Categorie : <span class="category tag is-light mb-1"></span></p>
             <p>Contexte: <span class="context"></span></p>
             <p class="fixed"></p>
             <p class="label_category"></p>
-            <p class="keywords">Mots clés : </p>
+            <p class="keywords"><span>Mots clés : </span></p>
             <p>Contenu :</p>
             <div class="paragraphs"></div>
             <p>Liens internet :</p>

@@ -26,7 +26,7 @@ class FormEntry {
     this.keywordsContainerElm = document.querySelector('.keywords');
     this.linksContainerElm = document.querySelector('.links');
     this.capturesContainerElm = document.querySelector('.captures');
-    this.inputs = document.querySelectorAll('.input');
+    this.inputs = document.querySelectorAll('.inputForm');
     this.entryInputsElm = document.querySelectorAll('[data-entity="entry"]');
     this.addQueries = {};
     this.deleteQueries = [];
@@ -61,7 +61,7 @@ class FormEntry {
     removeIcon.addEventListener('click', (e) => {
       e.target.parentElement.remove();
     });
-    clone.querySelector('.input').addEventListener('change', this.handleModif.bind(this));
+    clone.querySelector('.inputForm').addEventListener('change', this.handleModif.bind(this));
     parent.append(clone);
   }
 
