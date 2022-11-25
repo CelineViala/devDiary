@@ -8,10 +8,7 @@ const router = express.Router();
 const {
   entryController, keywordController, paragraphController, linkController, newsController,
 } = require('../controllers');
-
-router.get('/api/ping', (req, res) => {
-  res.send('pong');
-});
+// appel api tierce
 router.get('/api/getNews', controllerHandler(newsController.getNews));
 router.route('/api/entries')
   .get(controllerHandler(entryController.getAllEntries))
@@ -25,10 +22,6 @@ router.route('/api/entry/:id')
   .get(controllerHandler(entryController.findOneEntry))
   .delete(controllerHandler(entryController.deleteEntry))
   .patch(controllerHandler(entryController.updateEntry));
-router.route('/api/keyword')
-  .post(controllerHandler(keywordController.createNewKeyword));
-router.route('/api/keyword')
-  .delete(controllerHandler(keywordController.deleteKeyword));
 router.route('/api/keyword/:idEntry')
   .post(controllerHandler(keywordController.createKeyword));
 router.route('/api/link/:id')

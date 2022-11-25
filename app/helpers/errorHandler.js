@@ -1,5 +1,6 @@
+const debug = require('debug')('app:error');
 /**
-  * Middleware that respond to a next method with an error as argument
+  * Middleware responding with an error as argument
   * @param {object} err Error class
   * @param {object} res Express response object
   */
@@ -13,27 +14,19 @@ const errorHandler = (err, _, res, next) => {
   }
 
   if (statusCode === 500 || statusCode === 400) {
-    console.log(err.message);
+    debug(err.message);
   }
 
-  // Si l'application n'est pas en développement on reste vague sur l'erreur serveur
+  message = err.message;
   if (statusCode === 500 && process.env.NODE_ENV === 'production') {
     message = 'Internal Server Error';
   }
-  message = err.message;
-  if (res.get('Content-type')?.includes('html')) {
-    res.status(statusCode).render('erreur', {
-      statusCode,
-      message,
-      title: `Erreur ${err.statusCode}`,
-    });
-  } else {
-    res.status(statusCode).json({
-      status: 'erreur',
-      statusCode,
-      message,
-    });
-  }
+
+  res.status(statusCode).json({
+    status: 'erreur',
+    statusCode,
+    message,
+  });
 };
 
 module.exports = {

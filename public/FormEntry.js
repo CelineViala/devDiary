@@ -158,9 +158,7 @@ class FormEntry {
           });
         });
         const p4 = Promise.resolve();
-        // Promise.all([p1, p2, p3, p4]).then(() => { document.location.href = 'http://localhost:4000/'; }).catch(() => console.log('ppppppppp'));
-
-        // if (!err) { document.location.href = 'http://localhost:4000/'; }
+        Promise.all([p1, p2, p3, p4]).then(() => { document.location.href = 'http://localhost:4000/'; }).catch(() => console.log('erreur'));
       }
     });
   }
