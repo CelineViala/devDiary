@@ -65,6 +65,7 @@ class FormEntry {
     const removeIcon = clone.querySelector('.removeItem');
     removeIcon.addEventListener('click', (e) => {
       e.target.parentElement.remove();
+      delete this.addQueries[`api/${e.target.previousElementSibling.dataset.entity}/${this.idEntry}`];
     });
     clone.querySelector('.inputForm').addEventListener('change', this.handleModif.bind(this));
     parent.append(clone);
@@ -130,19 +131,36 @@ class FormEntry {
 
         if (response) { document.location.href = 'http://localhost:4000/'; }
       } else {
-        Object.entries(this.updateQueries).forEach(async ([key, value]) => {
-          await Utils.fetchData(`http://localhost:4000/${key}`, 'PATCH', JSON.stringify(value));
-        });
-        Object.entries(this.addQueries).forEach(async ([key, value]) => {
-          value.forEach(async (obj) => {
-            await Utils.fetchData(`http://localhost:4000/${key}`, 'POST', JSON.stringify(obj));
+        const err = false;
+        const p1 = new Promise((resolve, reject) => {
+          if (!Object.entries(this.updateQueries).length) resolve();
+          Object.entries(this.updateQueries).forEach(async ([key, value], index) => {
+            if (!await Utils.fetchData(`http://localhost:4000/${key}`, 'PATCH', JSON.stringify(value))) {
+              reject();
+            }
+            if (index === Object.entries(this.updateQueries).length - 1) resolve();
           });
         });
-        this.deleteQueries.forEach(async (query) => {
-          await Utils.fetchData(`http://localhost:4000/${query}`, 'DELETE', null);
+        const p2 = new Promise((resolve, reject) => {
+          if (!Object.entries(this.addQueries).length) resolve();
+          Object.entries(this.addQueries).forEach(async ([key, value], index) => {
+            value.forEach(async (obj) => {
+              if (!await Utils.fetchData(`http://localhost:4000/${key}`, 'POST', JSON.stringify(obj))) reject();
+            });
+            if (index === Object.entries(this.addQueries).length - 1) resolve();
+          });
         });
-        console.log('TTTTTTTTTTTTTTTTTTTTTTTTT');
-        // document.location.href = 'http://localhost:4000/';
+        const p3 = new Promise((resolve, reject) => {
+          if (!Object.entries(this.deleteQueries).length) resolve();
+          this.deleteQueries.forEach(async (query, index) => {
+            if (!await Utils.fetchData(`http://localhost:4000/${query}`, 'DELETE', null)) reject();
+            if (index === this.deleteQueries.length - 1) resolve();
+          });
+        });
+        const p4 = Promise.resolve();
+        // Promise.all([p1, p2, p3, p4]).then(() => { document.location.href = 'http://localhost:4000/'; }).catch(() => console.log('ppppppppp'));
+
+        // if (!err) { document.location.href = 'http://localhost:4000/'; }
       }
     });
   }
@@ -159,6 +177,8 @@ class FormEntry {
       if (e.target.parentElement.dataset.entity === 'keyword') {
         query += `/entry/${this.idEntry}`;
       }
+      delete this.updateQueries[`api/${e.target.parentElement.dataset.entity}/${e.target.parentElement.dataset.id}`];
+
       this.deleteQueries.push(query);
       e.target.parentElement.remove();
     });

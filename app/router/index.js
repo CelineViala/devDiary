@@ -1,7 +1,7 @@
 const express = require('express');
 const controllerHandler = require('../helpers/controllerHandler');
 const { errorHandler } = require('../helpers/errorHandler');
-const { entrySchema, paragraphCreateSchema } = require('../validation/schemas');
+const { entrySchema, paragraphUpdateSchema } = require('../validation/schemas');
 const validate = require('../validation/validator');
 
 const router = express.Router();
@@ -35,9 +35,9 @@ router.route('/api/link/:id')
   .delete(controllerHandler(linkController.deleteLink))
   .post(controllerHandler(linkController.createLink));
 router.route('/api/paragraph/:id')
-  .patch(controllerHandler(paragraphController.updateParagraph))
+  .patch(validate('body', paragraphUpdateSchema), controllerHandler(paragraphController.updateParagraph))
   .delete(controllerHandler(paragraphController.deleteParagraph))
-  .post(validate('body', paragraphCreateSchema), controllerHandler(paragraphController.createParagraph));
+  .post(controllerHandler(paragraphController.createParagraph));
 router.route('/api/keyword/:keywordId/entry/:entryId')
   .delete(controllerHandler(keywordController.unlinkKeywordAndEntry));
 router.use(errorHandler);

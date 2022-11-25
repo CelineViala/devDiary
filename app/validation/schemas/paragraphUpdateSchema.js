@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 module.exports = Joi.object({
-  content: Joi.string().min(3)
+  content: Joi.string().min(1)
     .required()
     .messages({
       'any.required': 'Le contenu est un champ obligatoire',

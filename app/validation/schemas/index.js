@@ -1,7 +1,7 @@
 const entrySchema = require('./entrySchema');
-const paragraphCreateSchema = require('./paragraphCreateSchema');
+const paragraphUpdateSchema = require('./paragraphUpdateSchema');
 
 module.exports = {
-  entrySchema, paragraphCreateSchema,
+  entrySchema, paragraphUpdateSchema,
 
 };
