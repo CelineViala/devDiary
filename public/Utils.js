@@ -13,7 +13,6 @@ class Utils {
       const msgElm = document.querySelector('.msg');
       if (msgElm) { msgElm.textContent = error; }
       alert(error);
-      return error;
     }
   }
 

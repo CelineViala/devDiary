@@ -90,6 +90,7 @@ class FormEntry {
       input.addEventListener('change', (e) => {
         this.updateParams[e.target.dataset.entity][e.target.dataset.field] = e.target.value;
         this.updateQueries[(`api/${e.target.dataset.entity}/${e.target.dataset.id}`)] = this.updateParams[e.target.dataset.entity];
+        console.log(this.updateQueries);
       });
     });
     this.formElm?.addEventListener('submit', async (e) => {
@@ -125,7 +126,9 @@ class FormEntry {
           links: linksArray,
           categoryId,
         });
-        await Utils.fetchData('/api/entries', 'POST', bodyObject);
+        const response = await Utils.fetchData('/api/entries', 'POST', bodyObject);
+
+        if (response) { document.location.href = 'http://localhost:4000/'; }
       } else {
         Object.entries(this.updateQueries).forEach(async ([key, value]) => {
           await Utils.fetchData(`http://localhost:4000/${key}`, 'PATCH', JSON.stringify(value));
@@ -138,8 +141,9 @@ class FormEntry {
         this.deleteQueries.forEach(async (query) => {
           await Utils.fetchData(`http://localhost:4000/${query}`, 'DELETE', null);
         });
+        console.log('TTTTTTTTTTTTTTTTTTTTTTTTT');
+        // document.location.href = 'http://localhost:4000/';
       }
-      document.location.href = 'http://localhost:4000/';
     });
   }
 
@@ -182,6 +186,11 @@ class FormEntry {
         paragraphElm.setAttribute('data-id', key);
         divElm.setAttribute('data-entity', 'paragraph');
         paragraphElm.textContent = value;
+        const paragraphId = paragraphElm.dataset.id;
+        const self = this;
+        paragraphElm.addEventListener('change', (e) => {
+          self.updateQueries[`api/paragraph/${paragraphId}`] = { content: e.target.value };
+        });
         divElm.appendChild(this.#getDeleteElm());
         this.paragraphsContainerElm.appendChild(clone);
       });

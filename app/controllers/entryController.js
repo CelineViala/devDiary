@@ -5,11 +5,7 @@ const {
 const { searchByCategory, searchByKeyword } = require('../models/diaryEntry');
 
 module.exports = {
-  async getNews(req,res) {
-    const response = await fetch('https://newsdata.io/api/1/news?apikey=pub_13871b9f4384a12c13ce75ecb1e14eed3bf6e&q=development%20OR%20computer%20OR%20informatique%20OR%20programmation%20OR%20algorithm%20OR%20algorithme&category=technology&language=fr,en&page=1');
-    const news = await response.json();
-    return res.json(news);
-  },
+
   async getAllEntries(req, res) {
     const rows = await DiaryEntry.findAll();
     return res.json(rows);
