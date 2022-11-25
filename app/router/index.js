@@ -6,18 +6,22 @@ const validate = require('../validation/validator');
 
 const router = express.Router();
 const {
-  entryController, keywordController, paragraphController, linkController,
+  entryController, keywordController, paragraphController, linkController, newsController,
 
 } = require('../controllers');
 
 router.get('/api/ping', (req, res) => {
   res.send('pong');
 });
+router.get('/api/getNews', controllerHandler(newsController.getNews));
 router.route('/api/entries')
   .get(controllerHandler(entryController.getAllEntries))
   .post(validate('body', entryCreateSchema), controllerHandler(entryController.createNewEntry))
   .delete(controllerHandler(entryController.deleteEntries));
-
+router.post('/api/entries/searchBy/title', controllerHandler(entryController.searchByTitle));
+router.post('/api/entries/searchBy/keyword', controllerHandler(entryController.searchByKeyword));
+router.post('/api/entries/searchBy/date', controllerHandler(entryController.searchByDate));
+router.post('/api/entries/searchBy/category', controllerHandler(entryController.searchByCategory));
 router.route('/api/entry/:id')
   .get(controllerHandler(entryController.findOneEntry))
   .delete(controllerHandler(entryController.deleteEntry))

@@ -76,11 +76,12 @@ class Entry {
 
     // Add clone to DOM
     const containerElm = document.querySelector('.containerEntries');
+    
     containerElm.append(cloneEntryElm);
   }
 
   static displayOneEntry(entry) {
-    console.log(entry)
+    console.log(entry);
     const paragraphsContainerElm = document.querySelector('.paragraphs');
     const keywordsContainerElm = document.querySelector('.keywords');
     const linksContainerElm = document.querySelector('.links');
@@ -107,7 +108,7 @@ class Entry {
 
         paragraphsContainerElm.appendChild(paragraphElm);
       });
-    }
+    } else this.hide(paragraphsContainerElm.firstElementChild);
     if (entry.keywords) {
       Object.entries(entry.keywords)?.forEach(([key, value]) => {
         const keywordElm = document.createElement('span');
@@ -131,6 +132,6 @@ class Entry {
         pElm.appendChild(linkElm);
         linksContainerElm.appendChild(pElm);
       });
-    }
+    } else this.hide(linksContainerElm.firstElementChild);
   }
 }

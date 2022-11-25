@@ -15,11 +15,14 @@
 <body>
 
     <nav class="navbar container has-background-link mb-4" role="navigation" aria-label="main navigation">
-        <ul class="navbar-brand">
-            <li><a class="navbar-item has-text-link-light" href="index.html">Accueil</a></li>
-            <li><a class="navbar-item has-text-link-light" href="new.html">Ajouter une nouvelle entrée</a></li>
-
-        </ul>
+        <div class="navbar-brand navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item has-text-link-light is-size-4" href="index.html">My dev' diary</a>
+            </div>
+            <div class="navbar-end">
+                <a class="navbar-item has-text-link-light" href="new.html">Ajouter une nouvelle entrée</a>
+            </div>
+        </div>
     </nav>
     <header class="container">
         <h1 class="title"></h1>
@@ -33,10 +36,12 @@
             <p class="fixed"></p>
             <p class="label_category"></p>
             <p class="keywords"><span>Mots clés : </span></p>
-            <p>Contenu :</p>
-            <div class="paragraphs"></div>
-            <p>Liens internet :</p>
+            <div class="paragraphs">
+                <span>Contenu :</span>
+
+            </div>
             <div class="links">
+                <span>Liens internet :</span>
 
             </div>
             <a class="modify" href="new.html"><button class="button">Modifier</button></a>

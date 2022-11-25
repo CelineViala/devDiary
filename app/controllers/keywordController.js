@@ -14,8 +14,8 @@ module.exports = {
     const idEntry = Number(req.params.idEntry);
     // tableName, property, value
     let row;
-    row = await Keyword.findByProperty('keyword', 'label', req.body.label);
-    if (!row) { row = await Keyword.create({ label: req.body.label }); }
+    row = await Keyword.findByProperty('keyword', 'label', req.body.label.toLowerCase());
+    if (!row) { row = await Keyword.create({ label: req.body.label.toLowerCase() }); }
     console.log('row', row);
     await Keyword.link(Number(row.id), idEntry);
     return res.json(row);

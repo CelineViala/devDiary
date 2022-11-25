@@ -11,7 +11,7 @@ class Utils {
     } catch (error) {
       console.log(error);
       const msgElm = document.querySelector('.msg');
-      msgElm.textContent = error;
+      if (msgElm) { msgElm.textContent = error; }
       alert(error);
       return error;
     }

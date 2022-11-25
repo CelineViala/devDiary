@@ -3,7 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src * gap:; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src *; img-src * data: blob: android-webview-video-poster:; style-src * 'unsafe-inline';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
@@ -15,49 +17,74 @@
 <body>
 
     <nav class="navbar container has-background-link mb-4" role="navigation" aria-label="main navigation">
-        <ul class="navbar-brand">
-            <li><a class="navbar-item has-text-link-light" href="index.html">Accueil</a></li>
-            <li><a class="navbar-item has-text-link-light" href="new.html">Ajouter une nouvelle entrée</a></li>
-
-        </ul>
+        <div class="navbar-brand navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item has-text-link-light is-size-4" href="index.html">My dev' diary</a>
+            </div>
+            <div class="navbar-end">
+                <a class="navbar-item has-text-link-light" href="new.html">Ajouter une nouvelle entrée</a>
+            </div>
+        </div>
     </nav>
-    
-    
+
+    <template id="newsTemplate">
+        <section data-entry-id="A" class="card mb-2">
+            <div class="card-content">
+                <h3 class="titleNews mb-1">Titre</h3>
+                <a class="linkNews mb-1" href=""></a>
+            </div>
+        </section>
+    </template>
+    <template id="entryTemplate">
+        <section data-entry-id="A" class="card mb-2">
+            <div class="card-content">
+                <h3><a class="title mb-1" href="">Titre</a> </h3>
+                <p class="date has-text-link mb-1">Date</p>
+                <p>Categorie : <span class="category tag is-light mb-1"></span></p>
+                <p>Contexte: <span class="context mb-1"></span></p>
+                <p class="fixed mb-1"></p>
+                <p class="label_category mb-1"></p>
+                <p class="keywords mb-1"><span>Mots clés : </span> </p>
+            </div>
+
+        </section>
+
+    </template>
+
+    <form class="searchForm column is-half mb-4 container" action="">
+        <label for="">Rechercher par</label>
+        <select class="form-select searchSelect input" for="searchSelect">
+            <option name="searchSelect" value="title">
+                titre
+            </option>
+            <option name="searchSelect" value="category">
+                categorie
+            </option>
+            <option name="searchSelect" value="keyword">
+                mot clé
+            </option>
+            <option name="searchSelect" value="date">
+                date
+            </option>
+        </select>
+        <input type="text" class="input fieldSearch inputTitle" placeholder="entrez un titre">
+        <input type="text" class="input fieldSearch is-hidden inputKeyword" placeholder="entrez un mot-clé">
+        <input type="date" class="input fieldSearch is-hidden inputDate">
+        <select name="category" class="input fieldSearch is-hidden inputCategory" id="category">
+            <option name="category" value="veille">veille</option>
+            <option name="category" value="bug">bug</option>
+            <option name="category" value="astuce">astuce</option>
+            <option name="category" value="autre">autre</option>
+        </select>
+        <button class="button is-success">Rechercher</button>
+        <button class="button is-success"> <a href="index.html" class="has-text-light"> Annuler le filtre</a></button>
+    </form>
+    <div class="newsContainer container">
+        <h2 class="title m-5 has-text-centered">Articles</h2>
+
+    </div>
     <main class="containerEntries container">
-        <h1 class="title has-text-centered my-2">My dev' diary</h1>
-        <h2 class="subtitle has-text-centered ml-4 my-2">Les dernières entrées</h2>
-        <form action="">
-            <label for="">Rechercher par</label>
-            <select class="form-select category input" for="category">
-                <option name="category" value="1">
-                    titre
-                </option>
-                <option name="category" value="2">
-                    categorie
-                </option>
-                <option name="category" value="3">
-                    mot clé
-                </option>
-                <option name="category" value="4">
-                    date
-                </option>
-            </select>
-        </form>
-        <template id="entryTemplate">
-            <section data-entry-id="A" class="card mb-2">
-                <div class="card-content">
-                    <h3><a class="title mb-1" href="">Titre</a> </h3>
-                    <p class="date has-text-link mb-1">Date</p>
-                    <p>Categorie : <span class="category tag is-light mb-1"></span></p>
-                    <p>Contexte: <span class="context mb-1"></span></p>
-                    <p class="fixed mb-1"></p>
-                    <p class="label_category mb-1"></p>
-                    <p class="keywords mb-1"><span>Mots clés : </span> </p>
-                </div>
-
-            </section>
-
-        </template>
+        <h2 class="title m-5 has-text-centered">Mon journal</h1>
 
 
     </main>

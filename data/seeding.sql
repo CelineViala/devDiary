@@ -9,14 +9,14 @@ INSERT INTO "category" ("label") VALUES
 ;
 INSERT INTO "diary_entry" ("title","date","context","fixed","category_id") VALUES
 ('PWA',NOW(),null,null,1),
-('métavers',NOW(),null,null,2),
+('Création BDD',NOW(),null,null,2),
 ('React',NOW(),null,null,3),
 ('Bug serveur',NOW(),'projet journal',TRUE,2),
 ('Bug mise à jour déplacement',NOW(),'hanoi towers',TRUE,2),
 ('Bug insertion BDD',NOW(),null,FALSE,1),
 ('Raccourcis clavier',NOW(),null,null,2),
-('script npm',NOW(),null,null,3),
-('models',NOW(),null,null,3)
+('Script npm',NOW(),null,null,3),
+('Models',NOW(),null,null,3)
 ;
 
 

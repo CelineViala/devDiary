@@ -1,8 +1,15 @@
+const fetch = require('node-fetch');
 const {
   DiaryEntry, Paragraph, Keyword, Link,
 } = require('../models');
+const { searchByCategory, searchByKeyword } = require('../models/diaryEntry');
 
 module.exports = {
+  async getNews(req,res) {
+    const response = await fetch('https://newsdata.io/api/1/news?apikey=pub_13871b9f4384a12c13ce75ecb1e14eed3bf6e&q=development%20OR%20computer%20OR%20informatique%20OR%20programmation%20OR%20algorithm%20OR%20algorithme&category=technology&language=fr,en&page=1');
+    const news = await response.json();
+    return res.json(news);
+  },
   async getAllEntries(req, res) {
     const rows = await DiaryEntry.findAll();
     return res.json(rows);
@@ -50,6 +57,29 @@ module.exports = {
     const { id } = req.params;
     const row = await DiaryEntry.update(Number(id), params);
     return res.json(row);
+  },
+
+  async searchByTitle(req, res) {
+    const { filter } = req.body;
+    const rows = await DiaryEntry.searchByTitle(filter);
+    return res.json(rows);
+  },
+  async searchByCategory(req, res) {
+    const { filter } = req.body;
+    const rows = await DiaryEntry.searchByCategory(filter);
+    return res.json(rows);
+  },
+  async searchByKeyword(req, res) {
+    const { filter } = req.body;
+    const keyword = await Keyword.findByProperty('keyword', 'label', filter);
+    let rows;
+    if (keyword) { rows = await DiaryEntry.searchByKeyword(keyword.id); } else rows = [];
+    return res.json(rows);
+  },
+  async searchByDate(req, res) {
+    const { filter } = req.body;
+    const rows = await DiaryEntry.searchByDate(filter);
+    return res.json(rows);
   },
 
 };

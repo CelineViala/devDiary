@@ -4,7 +4,51 @@ module.exports = class DiaryEntry extends CoreDatamapper {
   static tableName = 'diary_entry';
 
   static async findAll() {
-    const result = await this.client.query('SELECT * FROM "entry"');
+    const result = await this.client.query('SELECT * FROM "entry" ORDER BY date DESC');
+    return result.rows;
+  }
+
+  static async searchByTitle(filter) {
+    const preparedQuery = {
+      text: `
+      SELECT * FROM "entry" WHERE "title" ILIKE $1 ORDER BY date DESC
+      `,
+      values: [`%${filter}%`],
+    };
+    const result = await this.client.query(preparedQuery);
+    return result.rows;
+  }
+
+  static async searchByCategory(filter) {
+    const preparedQuery = {
+      text: `
+      SELECT * FROM "entry" WHERE "category"=$1 ORDER BY date DESC
+      `,
+      values: [filter],
+    };
+    const result = await this.client.query(preparedQuery);
+    return result.rows;
+  }
+
+  static async searchByKeyword(filter) {
+    const preparedQuery = { // k.keywords->>'2' IS NOT NULL
+      text: `
+      SELECT * FROM "entry" WHERE "keywords"->>$1 IS NOT NULL ORDER BY date DESC
+      `,
+      values: [filter],
+    };
+    const result = await this.client.query(preparedQuery);
+    return result.rows;
+  }
+
+  static async searchByDate(filter) {
+    const preparedQuery = { // k.keywords->>'2' IS NOT NULL
+      text: `
+      SELECT * FROM "entry" WHERE "date"<=$1 ORDER BY date DESC
+      `,
+      values: [filter],
+    };
+    const result = await this.client.query(preparedQuery);
     return result.rows;
   }
 
