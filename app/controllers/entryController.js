@@ -1,8 +1,6 @@
-const fetch = require('node-fetch');
 const {
   DiaryEntry, Paragraph, Keyword, Link,
 } = require('../models');
-const { searchByCategory, searchByKeyword } = require('../models/diaryEntry');
 
 module.exports = {
 
@@ -13,7 +11,6 @@ module.exports = {
   async findOneEntry(req, res) {
     const { id } = req.params;
     const row = await DiaryEntry.findByPk(id);
-    console.log(row);
     return res.json(row);
   },
   async createNewEntry(req, res) {
@@ -34,12 +31,11 @@ module.exports = {
     paragraphs.forEach(async (p) => {
       await Paragraph.create({ content: p.content, diary_entry_id: row.id });
     });
-
-    return res.json(row);
+    const entry = await DiaryEntry.findByPk(row.id);
+    return res.json(entry);
   },
   async deleteEntry(req, res) {
     const entryId = Number(req.params.id);
-    console.log(entryId);
     await DiaryEntry.deleteByPk(entryId);
     return res.json('OK');
   },
@@ -49,7 +45,6 @@ module.exports = {
   },
   async updateEntry(req, res) {
     const params = req.body;
-    console.log(params);
     const { id } = req.params;
     const row = await DiaryEntry.update(Number(id), params);
     return res.json(row);

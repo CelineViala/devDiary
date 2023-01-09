@@ -6,5 +6,4 @@ module.exports = {
     const news = await response.json();
     return res.json(news);
   },
-
 };

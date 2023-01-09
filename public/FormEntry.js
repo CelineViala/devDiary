@@ -97,10 +97,10 @@ class FormEntry {
     this.formElm?.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!this.modify) {
-        const title = this.titleElm.value !== '' ? this.titleElm.value : null;
-        const date = this.dateElm.value !== '' ? this.dateElm.value : null;
-        console.log(date);
-        const context = this.contextElm.value !== '' ? this.contextElm.value : null;
+        const title = this.titleElm.value;
+        const date = this.dateElm.value;
+
+        const context = this.contextElm.value;
         const categoryId = this.categoryElm.value;
         const keywordInputs = this.keywordsContainerElm.querySelectorAll('.keyword');
         const linksInputs = this.linksContainerElm.querySelectorAll('.link');
@@ -114,9 +114,9 @@ class FormEntry {
         keywordInputs.forEach((input) => {
           keywordsArray.push({ label: input.value });
         });
-        paragraphsElms.forEach((text) => { if (text.value !== '') paragraphsArray.push({ content: text.value }); });
-        capturesElms.forEach((elm) => { if (elm.value !== '') capturesArray.push({ path: elm.value }); });
-        linksInputs.forEach((input) => { if (input.value !== '') linksArray.push({ address: input.value }); });
+        paragraphsElms.forEach((text) => { paragraphsArray.push({ content: text.value }); });
+        capturesElms.forEach((elm) => { capturesArray.push({ path: elm.value }); });
+        linksInputs.forEach((input) => { linksArray.push({ address: input.value }); });
 
         const bodyObject = JSON.stringify({
           title,
@@ -157,8 +157,8 @@ class FormEntry {
             if (index === this.deleteQueries.length - 1) resolve();
           });
         });
-        const p4 = Promise.resolve();
-        Promise.all([p1, p2, p3, p4]).then(() => { document.location.href = 'http://localhost:4000/'; }).catch(() => console.log('erreur'));
+        // const p4 = Promise.resolve();
+        Promise.all([p1, p2, p3]).then(() => { document.location.href = 'http://localhost:4000/'; }).catch(() => console.log('erreur'));
       }
     });
   }

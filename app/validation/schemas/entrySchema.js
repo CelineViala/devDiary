@@ -16,7 +16,7 @@ module.exports = Joi.object({
       'date.base': 'Veuillez entrer une date valide',
 
     }),
-  context: Joi.string().allow(null)
+  context: Joi.string().allow('')
     .messages({
       'string.base': 'Le format du champ contexte est invalide',
     }),
